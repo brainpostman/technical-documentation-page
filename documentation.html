@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <header><h1>Position</h1></header>
+        <ul>
+            <li><a class="nav-link" href="#Overview"><div class="nav-text">Overview</div></a></li>
+            <li><a class="nav-link" href="#Syntax"><div class="nav-text">Syntax</div></a></li>
+            <li><a class="nav-link" href="#Values"><div class="nav-text">Values</div></a></li>
+            <li><a class="nav-link" href="#Description"><div class="nav-text">Description</div></a></li>
+            <li><a class="nav-link" href="#Accessibility_concerns"><div class="nav-text">Accessibility concerns</div></a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section id="Overview" class="main-section">
+            <header><h2>Overview</h2></header>
+            <p>The position CSS property sets how an element is positioned in a document.
+                The top, right, bottom, and left properties determine the final location
+                of positioned elements.</p>
+        </section>
+        <section id="Syntax" class="main-section">
+            <header><h2>Syntax</h2></header>
+            <p>
+                <code>
+                    position: static;<br>
+                    position: relative;<br>
+                    position: absolute;<br>
+                    position: fixed;<br>
+                    position: sticky;<br>
+                    <br>
+                    /* Global values */<br>
+                    position: inherit;<br>
+                    position: initial;<br>
+                    position: revert;<br>
+                    position: revert-layer;<br>
+                    position: unset;
+                </code>
+            </p>
+        </section>
+        <section id="Values" class="main-section">
+            <header><h2>Values</h2></header>
+            <ul id="value-list">
+                <li>
+                    <code>static</code>
+                    <p>The element is positioned according to the normal flow of the document.
+                        The top, right, bottom, left, and z-index properties have no effect.
+                        This is the default value.</p>
+                </li>
+                <li>
+                    <code>relative</code>
+                    <p>The element is positioned according to the normal flow of the document,
+                        and then offset relative to itself based on the values of top, right,
+                        bottom, and left. The offset does not affect the position of any other
+                        elements; thus, the space given for the element in the page layout is
+                        the same as if position were static. This value creates a new stacking
+                        context when the value of z-index is not auto. Its effect on table-*-group, table-row, table-column, table-cell, and table-caption elements is undefined.</p>
+                </li>
+                <li>
+                    <code>absolute</code>
+                    <p>The element is removed from the normal document flow, and no space
+                        is created for the element in the page layout. It is positioned
+                        relative to its closest positioned ancestor, if any; otherwise,
+                        it is placed relative to the initial containing block. Its final
+                        position is determined by the values of top, right, bottom, and left.
+                        This value creates a new stacking context when the value of z-index
+                        is not auto. The margins of absolutely positioned boxes do not
+                        collapse with other margins.</p>
+                </li>
+                <li>
+                    <code>fixed</code>
+                    <p>The element is removed from the normal document flow, and no space
+                        is created for the element in the page layout. It is positioned
+                        relative to the initial containing block established by the viewport,
+                        except when one of its ancestors has a transform, perspective, or
+                        filter property set to something other than none (see the CSS
+                        Transforms Spec), or the will-change property is set to transform,
+                        in which case that ancestor behaves as the containing block.
+                        (Note that there are browser inconsistencies with perspective and
+                        filter contributing to containing block formation.) Its final
+                        position is determined by the values of top, right, bottom, and left.
+                        This value always creates a new stacking context. In printed documents,
+                        the element is placed in the same position on every page.</p>
+                </li>
+                <li>
+                    <code>sticky</code>
+                    <p>The element is positioned according to the normal flow of the document,
+                        and then offset relative to its nearest scrolling ancestor and
+                        containing block (nearest block-level ancestor), including
+                        table-related elements, based on the values of top, right, bottom,
+                        and left. The offset does not affect the position of any other elements.
+                        This value always creates a new stacking context. Note that a sticky
+                        element "sticks" to its nearest ancestor that has a "scrolling mechanism" (created when overflow is hidden, scroll, auto, or overlay), even if that ancestor isn't the nearest actually scrolling ancestor.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="Description" class="main-section">
+            <header><h2>Description</h2></header>
+            <h3>Types of positioning</h3>
+            <ul>
+                <li>
+                    A positioned element is an element whose computed position value is
+                    either relative, absolute, fixed, or sticky. (In other words, it's
+                    anything except static.)
+                </li>
+                <li>
+                    A relatively positioned element is an element whose computed position
+                    value is relative. The top and bottom properties specify the vertical
+                    offset from its normal position; the left and right properties specify
+                    the horizontal offset.
+                </li>
+                <li>
+                    An absolutely positioned element is an element whose computed position
+                    value is absolute or fixed. The top, right, bottom, and left properties
+                    specify offsets from the edges of the element's containing block.
+                    (The containing block is the ancestor relative to which the element
+                    is positioned.) If the element has margins, they are added to the offset.
+                    The element establishes a new block formatting context (BFC) for
+                    its contents.
+                </li>
+                <li>
+                    A stickily positioned element is an element whose computed position
+                    value is sticky. It's treated as relatively positioned until its
+                    containing block crosses a specified threshold (such as setting top
+                    to value other than auto) within its flow root (or the container it
+                    scrolls within), at which point it is treated as "stuck" until meeting
+                    the opposite edge of its containing block.
+                </li>
+            </ul>
+            <p>Most of the time, absolutely positioned elements that have height and width
+                set to auto are sized so as to fit their contents. However, non-replaced,
+                absolutely positioned elements can be made to fill the available vertical
+                space by specifying both top and bottom and leaving height unspecified (that
+                is, auto). They can likewise be made to fill the available horizontal space
+                by specifying both left and right and leaving width as auto.</p>
+
+            <p>Except for the case just described (of absolutely positioned elements filling
+                the available space):</p>
+            <ul>
+                <li>
+                    If both top and bottom are specified (technically, not auto), top wins.
+                </li>
+                <li>
+                    If both left and right are specified, left wins when direction is ltr
+                    (English, horizontal Japanese, etc.) and right wins when direction is
+                    rtl (Persian, Arabic, Hebrew, etc.).
+                </li>
+            </ul>
+        </section>
+        <section id="Accessibility_concerns" class="main-section">
+            <header><h2>Accessibility concerns</h2></header>
+            <p>Ensure that elements positioned with an absolute or fixed value do not obscure
+                other content when the page is zoomed to increase text size.</p>
+            <h3>
+                Performance & Accessibility
+            </h3>
+            <p>Scrolling elements containing fixed or sticky content can cause performance
+                and accessibility issues. As a user scrolls, the browser must repaint the
+                sticky or fixed content in a new location. Depending on the content needing
+                to be repainted, the browser performance, and the device's processing speed,
+                the browser may not be able to manage repaints at 60 fps, causing accessibility
+                concerns for people with sensitivities and jank for everyone. One solution is
+                to add will-change: transform to the positioned elements to render the element
+                in its own layer, improving repaint speed and therefore improving performance
+                and accessibility.</p>
+        </section>
+        <footer>Source: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">position</a></footer>
+    </main>
+</body>
+</html>
